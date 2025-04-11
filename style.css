@@ -1,0 +1,619 @@
+/****************************************************************************************/
+/* الاكواد عامه بتحدد اللوان المشروع كله والتنسق العام */
+/****************************************************************************************/
+
+
+    /* المتغيرات الأساسية للألوان */
+    :root {
+    --primary: #e63946;    /* اللون الأساسي (أحمر) */
+    --dark: #1f4fa2;       /* اللون الداكن (أزرق) */
+    --light: #f8f9fa;      /* اللون الفاتح (خلفية الصفحة) */
+    }
+
+    /* إعادة تعيين الهوامش والحشوات */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Tajawal', sans-serif;
+    }
+
+    /* تنسيق عام للصفحة */
+    body {
+        background: var(--light);
+        min-height: 100vh;
+    }
+
+/****************************************************************************************/
+/* دي اكواد  خاصه بالشريط الجانبي بتحدد شكله وحجمه ولونه */
+/****************************************************************************************/
+
+    /* تنسيق القائمة الجانبية */
+    .sidebar {
+        position: fixed;
+        right: -300px;          /* إخفاء القائمة خارج الشاشة */
+        top: 0;
+        width: 300px;
+        height: 100vh;         /* ارتفاع كامل للشاشة */
+        background: var(--dark);
+        color: white;
+        transition: right 0.3s; /* حركة سلسة عند الظهور */
+        padding: 20px;
+        z-index: 1000;         /* التأكد من ظهورها فوق كل العناصر */
+    }
+    /* حالة القائمة عند ظهورها */
+    .sidebar.active {
+        right: 0;
+    }
+    /* تنسيق عنوان القائمة */
+    .sidebar .logo {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    /* تنسيق روابط القائمة */
+    .sidebar-menus a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 12px;
+        margin: 5px 0;
+        border-radius: 5px;
+        transition: all 0.3s;
+    }
+    /* تأثير عند مرور الماوس على الروابط */
+    .sidebar-menus a:hover {
+        background: var(--primary);
+        transform: translateX(-5px);
+    }
+    /* زر إغلاق القائمة */
+    .menu-off {
+        background: var(--primary);
+        margin-top: 20px;
+        text-align: center;
+    }
+
+/****************************************************************************************/
+/* دي اكواد خاصه بالشريط العلوي واللي بتحدد حجمه ولونه وشكله */
+/****************************************************************************************/
+
+    /* شريط التنقل العلوي */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    /* تنسيق الشعار في الشريط العلوي */
+    .navbar img {
+        height: 10%;
+    }
+    .head-img {
+        width: 30%;
+    }
+    /* تأثير الأزرار عند المرور عليها */
+    .menu-toggle, .user {
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+    .menu-toggle:hover, .user:hover {
+        transform: scale(1.1);
+    }
+
+/****************************************************************************************/
+/* دا كود خاصه بالديف اللي اسمها "مين" والي بداخلها جميع اجزاء المشروع ما عدى  الشريط العلوي والجانبي */
+/****************************************************************************************/
+
+    .main {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #dce2fb;
+        margin: 0;
+        padding: 10px;
+    }
+
+/****************************************************************************************/
+/* دي الاكواد الخاصه بالصوره اللي في الواجهه والشريط اللي بيلف  */
+/****************************************************************************************/
+
+    /* الشريط المتحرك للنص */
+    .marquee {
+        width: 100%;
+        padding: 10px 0;
+        background: var(--dark);
+        color: white;
+        margin: 15px 0;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    /* حركة الشريط المتحرك */
+    .marquee p {
+        display: inline-block;
+        padding-left: 100%;
+        animation: marquee 15s linear infinite;
+    }
+    /* حركة الشريط من اليمين لليسار */
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+    .background{
+        background-image: url('./اساسيات/WhatsApp\ .jpg'); /* استبدل URL_الصورة_الخاصة_بك برابط صورتك */
+        background-size: cover;
+        background-position: center;
+        box-shadow: var(--shadow);
+        animation: moveBackground 80s linear infinite alternate; /* حركة الخلفية */
+    }
+      
+/****************************************************************************************/
+/* دي اكواد خاصه بالزراير اللي اسف الصفحة الخاصه بالكيو ار وبالاتصال */
+/****************************************************************************************/
+
+    .services {
+        display: flex; /* لجعل الأزرار بجانب بعضها */
+        justify-content: center; /* لتوسيط الأزرار أفقيًا */
+        flex-wrap: wrap; /* للسماح بلف الأزرار إذا لم يكن هناك مساحة كافية */
+        gap: 15px; /* لإضافة مسافة بين الأزرار */
+        padding: 20px;
+    }
+    .service-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        min-width: 150px;
+        text-align: center;
+        transition: all 0.3s;
+    }
+    .service-btn:hover {
+        background: var(--dark);
+        transform: translateY(-3px);
+    }
+    .services button:nth-child(2) p { 
+        color: white; 
+        text-decoration: none; 
+    }
+
+/****************************************************************************************/
+/* دي خاصه بكود الفوتر واللي هو الشريط اللي في اسفل الصفحة خالص */
+/****************************************************************************************/
+
+    /* تذييل الصفحة */
+    .footer {
+        background: var(--dark);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 30px;
+    }
+  
+/****************************************************************************************/
+/* دي اكواد خاصه بالفورم اللي بيتسجل فيه بيانات الطلاب واللي بتحدد شكله وحجمه ولونه */
+/****************************************************************************************/
+
+    /* عنوان الصفحة */
+    .page-title {
+        text-align: center;
+        margin: 20px 0;
+        color: var(--dark);
+    }
+    /* نموذج التسجيل */
+    .registration-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.502);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    }
+    @keyframes moveBackground {
+    from {
+    background-position: left center;
+    }
+    to {
+    background-position: right center;
+    }
+    }
+    .form-group {
+    margin-bottom: 20px;
+    }
+    .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--dark);
+    font-weight: 500;
+    }
+    .form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border 0.3s;
+    }
+    .form-control:focus {
+    border-color: var(--primary);
+    outline: none;
+    }
+    .submit-btn {
+    background: #4d9240;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+    display: block;
+    width: 40%; /* عرض 50% من النموذج */
+    margin: 0 auto; /* تلقائي من الجانبين (للمركزة) */
+    display: block; /* لجعله في سطر منفصل */
+    }
+    .logout-btn {
+        background: #ff3232;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s;
+        display: block;
+        width: 20%;
+        margin: 0 auto; /* تلقائي من الجانبين (للمركزة) */
+        display: block; /* لجعله في سطر منفصل */
+    }
+    .submit-btn:hover {
+    background: var(--dark);
+    }
+
+/****************************************************************************************/
+/* دي الاكواد اللي خاصه بالكروت اللي بتظهر بيانات الطلاب كل طالب لوحده وبتحدد شكلها */
+/****************************************************************************************/
+
+    /* بطاقات البيانات */
+    .data-container {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80%, 3fr));
+    gap: 20px;
+    width: 100%;
+    margin: 20px auto;
+    border-radius: 20px;
+    background-color: #c4c4c4;
+    }
+    .data-title {
+    text-align: center;
+    margin: 20px 0;
+    color: var(--dark);
+    font-size: 2.8rem;
+    grid-column: 1 / -1;
+    }
+    .card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    transition: transform 0.3s;
+    font-size: 1.7rem;
+    margin: 20px;
+    }
+    .card:hover {
+    transform: translateY(-25px);
+    }
+    .card-content {
+    margin-bottom: 15px;
+    }
+    .card h2 {
+    color: var(--dark);
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+    }
+    .card-title {
+    color: #555;
+    font-size: 1.7rem;
+    }
+    hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 15px 0;
+    }
+    .checkybox {
+    display: block;
+    margin: 10px 0;
+    cursor: pointer;
+    }
+
+/****************************************************************************************/
+/* دي الاكواد الخاصه بالسنين والمواد والترمات وبتعرضها بشكل منظم */
+/****************************************************************************************/
+
+    .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    }
+    h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    }
+    .specializations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    }
+    .specialization {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: calc(25% - 20px);
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .specialization:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .specialization h2 {
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    text-align: center;
+    margin-top: 0;
+    }
+    .year {
+    margin-top: 15px;
+    overflow: hidden;
+    }
+    .year-header {
+    background-color: #e74c3c;
+    color: white;
+    padding: 12px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    }
+    .year-header:hover {
+    background-color: #c0392b;
+    transform: translateX(-5px);
+    }
+    .year-header h3 {
+    margin: 0;
+    font-size: 1.1em;
+    }
+    .year-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+    }
+    .year.active .year-content {
+    max-height: 1000px; /* يمكن تعديله حسب المحتوى */
+    padding-top: 10px;
+    }
+    .semester {
+    background-color: #f9f9f9;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+    .year.active .semester {
+    transform: translateY(0);
+    opacity: 1;
+    }
+    .year.active .semester:nth-child(1) {
+    transition-delay: 0.1s;
+    }
+    .year.active .semester:nth-child(2) {
+    transition-delay: 0.2s;
+    }
+    .semester h4 {
+    color: #2ecc71;
+    margin-top: 0;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed #2ecc71;
+    padding-bottom: 5px;
+    }
+    .courses {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    }
+    .courses li {
+    padding: 8px 0;
+    border-bottom: 1px dotted #ddd;
+    transition: all 0.2s ease;
+    }
+    .courses li:hover {
+    background-color: #f0f0f0;
+    padding-right: 5px;
+    }
+    .toggle-icon {
+    font-size: 1.2em;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+    .year.active .toggle-icon {
+    transform: rotate(180deg);
+    }
+
+/****************************************************************************************/
+/* دي الاكواد الخاصه بتسجيل الدخول */
+/****************************************************************************************/
+
+    #loginForm {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        font-family: 'Tajawal', sans-serif;
+        text-align: center;
+    }
+    .section__header {
+        color: #6A0C0B; /* اللون الأحمر الداكن */
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 700;
+    }
+    #loginForm h4 {
+        color: #333;
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+        font-weight: 500;
+    }
+    #loginForm input {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s;
+        text-align: right;
+    }
+    #loginForm input:focus {
+        border-color: #6A0C0B;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(106, 12, 11, 0.2);
+    }
+    .WhatsApp {
+        background-color: var(--dark);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        width: 100%;
+        font-weight: bold;
+    }
+    .WhatsApp:hover {
+        background-color: #266b2f;
+        transform: translateY(-2px);
+    }
+    .WhatsApp:active {
+        transform: translateY(0);
+    }
+    #loginForm {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+/*******************************/
+/* التكيف مع الشاشات الصغيرة */
+/*******************************/
+
+    @media (max-width: 768px) {
+
+    #loginForm {
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .section__header {
+        font-size: 1.8rem;
+    }
+    
+    #loginForm h4 {
+        font-size: 1rem;
+    }
+    
+    #loginForm input {
+        padding: 12px;
+    }
+    
+    .WhatsApp {
+        padding: 12px 25px;
+    }
+
+
+
+    .card {
+    font-size: 1.2rem;
+    margin: 0px;
+    margin-top: 20px;
+    }
+    .card h2 {
+    color: var(--dark);
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+    }
+    .card-title {
+    color: #555;
+    font-size: 1.2rem;
+    }
+    /* القائمة الجانبية تأخذ عرض كامل على الهاتف */
+    .sidebar {
+    width: 100%;
+    right: -100%;
+    }
+    .specialization {
+        width: calc(50% - 20px);
+    }
+    /* تنسيق أزرار الخدمات في عمود واحد */
+    .services {
+    flex-direction: column;
+    align-items: center;
+    }
+
+    /* جعل الأزرار تأخذ عرض كامل */
+    .service-btn {
+    width: 100%;
+    max-width: 300px;
+    }
+
+    /* تصغير حجم الشعار على الهاتف */
+    .navbar img {
+    height: 40px;
+    }
+    .head-img {
+    width: 70%;
+    }
+
+    .data-container {
+    grid-template-columns: 1fr;
+    }
+
+    .registration-form {
+    margin: 0 15px;
+    }
+
+    .navbar img {
+    height: 40px;
+    }
+
+    .specialization {
+    width: 100%;
+    }
+
+    .year-header {
+    padding: 10px 12px;
+    }
+
+    .year-header h3 {
+    font-size: 1em;
+    }
+
+    }

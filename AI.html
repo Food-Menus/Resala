@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنهج التعليمي للجامعة</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./اساسيات/Logo_OHI_min.png" type="image/x-icon">
+
+    <style>
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .assistant-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .conversation {
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .bot-message {
+            background-color: #e3f2fd;
+            color: #0d47a1;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .user-choice {
+            background-color: #00796b;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .typing-indicator {
+            display: none;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option-btn, .back-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .option-btn {
+            background-color: #2c3e50;
+            color: white;
+        }
+        
+        .option-btn:hover {
+            background-color: #1a252f;
+        }
+        
+        .back-btn {
+            background-color: #7f8c8d;
+            color: white;
+            margin-top: 10px;
+        }
+        
+        .back-btn:hover {
+            background-color: #616a6b;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2 class="logo">October High Institute</h2>
+        <div class="sidebar-menus">
+            <a href="https://www.facebook.com/ohinstitute">الصفحة الرسمية</a>
+            <a href="https://www.ohi.edu.eg/default.aspx">الموقع الرسمي</a>
+            <a href="https://wa.me/+201102716716?text=مرحبا اريد التواصل معكم">الدعم الفني</a>
+            <a href="./about.html">من نحن</a>
+            <a href="#" class="menu-off">إغلاق</a>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <div class="menu-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                <path d="M5 5H13V19H5V5ZM19 19H15V5H19V19ZM4 3C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V4C21 3.44772 20.5523 3 20 3H4ZM7 12L11 8.5V15.5L7 12Z"></path>
+            </svg>
+        </div>
+        
+        <img class="head-img" src="./اساسيات/logo.jpg" alt="شعار المعهد">
+        
+        <a href="./index.html" class="user">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM12 20C16.42 20 20 16.42 20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20ZM12 11H16V13H12V16L8 12L12 8V11Z"></path></svg>        </a>
+  
+    </div>
+
+    <div class="assistant-container">
+        <div class="conversation" id="conversation">
+        </div>
+        
+        <div class="typing-indicator" id="typing-indicator">يكتب...</div>
+        
+        <div class="options-container" id="options-container">
+            <!-- سيتم ملء الخيارات هنا بالجافاسكريبت -->
+        </div>
+    </div>
+    
+    <script>
+        // هيكل البيانات للأسئلة والإجابات المتشعبة
+        const knowledgeTree = {
+            "root": {
+                message: "مرحباً بكم في مساعد معهد أكتوبر العالي للهندسة والتكنولوجيا. كيف يمكنني مساعدتك اليوم؟",
+                options: [
+                    { text: "معلومات عامة عن المعهد", next: "general_info" },
+                    { text: "البرامج الدراسية", next: "programs" },
+                    { text: "شروط القبول", next: "admission" },
+                    { text: "الرسوم الدراسية", next: "fees" },
+                    { text: "اتصل بنا", next: "contact" }
+                ]
+            },
+            "general_info": {
+                message: "معهد أكتوبر العالي للهندسة والتكنولوجيا هو أحد أهم وأعرق المعاهد العليا الخاصة بجمهورية مصر العربية، تأسس المعهد عام 1993 بالقرار الوزاري رقم (1069) بتاريخ 9/12/1993 وفقاً للقانون (52) لسنة 1970 في شأن تنظيم المعاهد العالية الخاصة، ويتبع الجمعية العلمية الثقافية المشهرة برقم (967) لسنة 1989.",
+                options: [
+                    { text: "الرؤية والرسالة", next: "vision_mission" },
+                    { text: "الاعتمادات الأكاديمية", next: "accreditation" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "vision_mission": {
+                message: "رؤية المعهد: أن يكون رائداً في مجال التعليم الهندسي والتكنولوجي على المستوى المحلي والإقليمي. رسالة المعهد: تقديم تعليم هندسي وتكنولوجي متميز يواكب متطلبات سوق العمل ويُسهم في تنمية المجتمع.",
+                options: [
+                    { text: "العودة لمعلومات المعهد", next: "general_info" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "accreditation": {
+                message: "المعهد معتمد من وزارة التعليم العالي المصرية وتمنح شهاداته بناءً على القرار الوزاري رقم (1069) لسنة 1993. كما أن برامجه معترف بها من قبل المجلس الأعلى للجامعات.",
+                options: [
+                    { text: "العودة لمعلومات المعهد", next: "general_info" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "programs": {
+                message: "يقدم المعهد البرامج الدراسية التالية:",
+                options: [
+                    { text: "هندسة الحاسبات ونظم المعلومات", next: "computer_engineering" },
+                    { text: "هندسة الإلكترونيات والاتصالات", next: "electronics_engineering" },
+                    { text: "هندسة الميكاترونكس", next: "mechatronics_engineering" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "computer_engineering": {
+                message: "برنامج هندسة الحاسبات ونظم المعلومات: يهدف إلى إعداد مهندسين متخصصين في تصميم وتطوير أنظمة الحاسبات والشبكات والبرمجيات. مدة الدراسة 5 سنوات (سنة إعدادية + 4 سنوات تخصص).",
+                options: [
+                    { text: "متطلبات البرنامج", next: "computer_requirements" },
+                    { text: "العودة للبرامج الدراسية", next: "programs" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "computer_requirements": {
+                message: "متطلبات التخرج من برنامج هندسة الحاسبات: إتمام 165 ساعة معتمدة بنجاح، وتقديم مشروع تخرج في السنة النهائية، واجتياز فترة التدريب الميداني.",
+                options: [
+                    { text: "العودة لبرنامج الحاسبات", next: "computer_engineering" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "electronics_engineering": {
+                message: "برنامج هندسة الإلكترونيات والاتصالات: يهدف إلى إعداد مهندسين متخصصين في تصميم وتطوير أنظمة الإلكترونيات والاتصالات. مدة الدراسة 5 سنوات (سنة إعدادية + 4 سنوات تخصص).",
+                options: [
+                    { text: "متطلبات البرنامج", next: "electronics_requirements" },
+                    { text: "العودة للبرامج الدراسية", next: "programs" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "electronics_requirements": {
+                message: "متطلبات التخرج من برنامج الإلكترونيات: إتمام 160 ساعة معتمدة بنجاح، وتقديم مشروع تخرج في السنة النهائية، واجتياز فترة التدريب الميداني.",
+                options: [
+                    { text: "العودة لبرنامج الإلكترونيات", next: "electronics_engineering" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "mechatronics_engineering": {
+                message: "برنامج هندسة الميكاترونكس: يجمع بين الهندسة الميكانيكية والكهربائية وعلوم الحاسوب لتصميم الأنظمة الذكية. مدة الدراسة 5 سنوات (سنة إعدادية + 4 سنوات تخصص).",
+                options: [
+                    { text: "متطلبات البرنامج", next: "mechatronics_requirements" },
+                    { text: "العودة للبرامج الدراسية", next: "programs" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "mechatronics_requirements": {
+                message: "متطلبات التخرج من برنامج الميكاترونكس: إتمام 170 ساعة معتمدة بنجاح، وتقديم مشروع تخرج في السنة النهائية، واجتياز فترة التدريب الميداني.",
+                options: [
+                    { text: "العودة لبرنامج الميكاترونكس", next: "mechatronics_engineering" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "admission": {
+                message: "شروط القبول بالمعهد:",
+                options: [
+                    { text: "شروط الثانوية العامة", next: "thanawya_requirements" },
+                    { text: "شروط الثانوية الأزهرية", next: "azhar_requirements" },
+                    { text: "شروط الشهادات المعادلة", next: "equivalent_requirements" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "thanawya_requirements": {
+                message: "شروط قبول طلاب الثانوية العامة: الحصول على الحد الأدنى للقبول الذي يحدده مكتب التنسيق سنوياً، مع اجتياز اختبارات القبول التي يعقدها المعهد إن لزم الأمر.",
+                options: [
+                    { text: "العودة لشروط القبول", next: "admission" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "azhar_requirements": {
+                message: "شروط قبول طلاب الثانوية الأزهرية: الحصول على الحد الأدنى للقبول الذي يحدده المعهد سنوياً، مع تقديم ما يثبت دراسة الرياضيات والفيزياء.",
+                options: [
+                    { text: "العودة لشروط القبول", next: "admission" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "equivalent_requirements": {
+                message: "شروط قبول الشهادات المعادلة: معادلة الشهادة من المجلس الأعلى للجامعات المصرية، والحصول على الحد الأدنى للقبول الذي يحدده المعهد.",
+                options: [
+                    { text: "العودة لشروط القبول", next: "admission" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "fees": {
+                message: "الرسوم الدراسية بالمعهد تختلف حسب البرنامج الدراسي والسنة الدراسية. بشكل عام، تتراوح الرسوم بين 25,000 إلى 35,000 جنيه مصري سنوياً.",
+                options: [
+                    { text: "طرق السداد", next: "payment_methods" },
+                    { text: "المنح الدراسية", next: "scholarships" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "payment_methods": {
+                message: "يمكن سداد الرسوم الدراسية: نقداً بمقر المعهد، أو بالشيكات المصرفية، أو بالتحويل البنكي. كما يمكن تقسيط الرسوم على قسطين أو ثلاثة أقساط حسب لائحة المعهد.",
+                options: [
+                    { text: "العودة للرسوم الدراسية", next: "fees" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "scholarships": {
+                message: "يقدم المعهد عدداً محدوداً من المنح الدراسية للطلاب المتفوقين والمتميزين رياضياً واجتماعياً. للحصول على تفاصيل المنح، يرجى التواصل مع مكتب شؤون الطلاب.",
+                options: [
+                    { text: "العودة للرسوم الدراسية", next: "fees" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "contact": {
+                message: "للتواصل مع معهد أكتوبر العالي للهندسة والتكنولوجيا: العنوان: الكيلو 26 طريق مصر الإسكندرية الصحراوي، بجوار مدينة الأمل. الهاتف: 0238245678 البريد الإلكتروني: info@october-institute.edu.eg",
+                options: [
+                    { text: "مواعيد العمل", next: "working_hours" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            },
+            "working_hours": {
+                message: "مواعيد العمل بالمعهد: من الأحد إلى الخميس من الساعة 8 صباحاً حتى 4 مساءً. مكتب شؤون الطلاب يعمل خلال نفس المواعيد.",
+                options: [
+                    { text: "العودة لبيانات الاتصال", next: "contact" },
+                    { text: "العودة للقائمة الرئيسية", next: "root" }
+                ]
+            }
+        };
+    
+        // متغيرات DOM
+        const conversation = document.getElementById('conversation');
+        const optionsContainer = document.getElementById('options-container');
+        const typingIndicator = document.getElementById('typing-indicator');
+    
+        // متغير لتتبع المسار الحالي
+        let currentPath = ['root'];
+    
+        // تهيئة المساعد عند تحميل الصفحة
+        window.onload = function() {
+            showNode('root');
+        };
+    
+        // دالة لعرض العقدة (السؤال والخيارات)
+        function showNode(nodeId) {
+            const node = knowledgeTree[nodeId];
+            if (!node) return;
+    
+            // عرض مؤشر الكتابة
+            showTypingIndicator();
+            
+            // مسح الخيارات القديمة
+            optionsContainer.innerHTML = '';
+            
+            // تأخير لعرض الرسالة والخيارات
+            setTimeout(() => {
+                hideTypingIndicator();
+                
+                // عرض رسالة البوت
+                displayMessage(node.message, 'bot');
+                
+                // عرض الخيارات
+                node.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'option-btn';
+                    button.textContent = option.text;
+                    button.onclick = function() {
+                        // عرض اختيار المستخدم
+                        displayMessage(option.text, 'user');
+                        
+                        // تحديث المسار
+                        currentPath.push(option.next);
+                        
+                        // الانتقال للعقدة التالية
+                        showNode(option.next);
+                    };
+                    optionsContainer.appendChild(button);
+                });
+                
+                // إضافة زر العودة إذا لم يكن في الجذر
+                if (nodeId !== 'root') {
+                    const backButton = document.createElement('button');
+                    backButton.className = 'back-btn';
+                    backButton.textContent = '← العودة للسابق';
+                    backButton.onclick = function() {
+                        // العودة للعقدة السابقة
+                        currentPath.pop();
+                        const prevNode = currentPath[currentPath.length - 1];
+                        showNode(prevNode);
+                    };
+                    optionsContainer.appendChild(backButton);
+                }
+                
+                // التمرير لأسفل
+                conversation.scrollTop = conversation.scrollHeight;
+            }, 1000);
+        }
+    
+        // دالة لعرض الرسالة في المحادثة
+        function displayMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            
+            if (sender === 'user') {
+                messageElement.classList.add('user-choice');
+            } else {
+                messageElement.classList.add('bot-message');
+            }
+            
+            messageElement.textContent = message;
+            conversation.appendChild(messageElement);
+            
+            // التمرير لأسفل
+            conversation.scrollTop = conversation.scrollHeight;
+        }
+    
+        // دالة عرض مؤشر الكتابة
+        function showTypingIndicator() {
+            typingIndicator.style.display = 'block';
+            conversation.scrollTop = conversation.scrollHeight;
+        }
+    
+        // دالة إخفاء مؤشر الكتابة
+        function hideTypingIndicator() {
+            typingIndicator.style.display = 'none';
+        }
+    </script>
+
+    <div class="footer">
+        <p> ©2025 حقوق النشر طلاب معهد اكتوبر العالي للهندسة</p>
+    </div>
+
+    <script src="javascript.js"></script>
+
+</body>
+
+</html>

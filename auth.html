@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>October High Institute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./اساسيات/Logo_OHI_min.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2 class="sidebar-logo">October High Institute</h2>
+        <div class="sidebar-menus">
+            <a href="https://www.facebook.com/ohinstitute">الصفحة الرسمية</a>
+            <a href="https://www.ohi.edu.eg/default.aspx">الموقع الرسمي</a>
+            <a href="https://wa.me/+201102716716?text=مرحبا اريد التواصل معكم">الدعم الفني</a>
+            <a href="./about.html">من نحن</a>
+            <a href="#" class="menu-off">إغلاق</a>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <div class="menu-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                <path d="M5 5H13V19H5V5ZM19 19H15V5H19V19ZM4 3C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V4C21 3.44772 20.5523 3 20 3H4ZM7 12L11 8.5V15.5L7 12Z"></path>
+            </svg>
+        </div>
+        <img class="header-logo" src="./اساسيات/logo.jpg" alt="شعار مطعم OHI">
+        <!-- أيقونة الموقع -->
+        <a href="./index.html" class="user">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM12 20C16.42 20 20 16.42 20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20ZM12 11H16V13H12V16L8 12L12 8V11Z"></path></svg>        </a>
+    </div>
+
+    <div class="main-content">
+
+
+        <br><h2 class="section__header">مرحباً بك </h2><br>
+
+        <form id="loginForm">
+            <h4>برجاء تسجيل الدخول اولا لتسجيل البيانات  </h4><br>
+
+            <input type="text" id="username" name="username" placeholder="أدخل أسم المستخدم">
+            <br>
+            <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور">
+            <br>
+            <button type="submit"  class="WhatsApp" >تسجيل الدخول</button>
+        </form>
+    
+
+        <div class="footer">
+            <p> ©2025 حقوق النشر طلاب معهد اكتوبر العالي للهندسة</p>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        const googleSheetUrl = 'https://docs.google.com/spreadsheets/d/1eAUNv-OksaLsAbuCNWr5_vrkaAEW15TxBLI7HcXHoxE/gviz/tq?tqx=out:json';
+        const targetObject = {};
+    
+        fetch(googleSheetUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text(); // الحصول على البيانات كنص
+            })
+            .then(data => {
+                // تحويل النص إلى JSON
+                const jsonData = JSON.parse(data.substr(47).slice(0, -2)); // إزالة بعض البيانات الزائدة
+                const rows = jsonData.table.rows;
+    
+                // إنشاء كائن لتخزين البيانات
+                const result = {};
+    
+                // ربط البيانات من الصفوف
+                rows.forEach(row => {
+                    const key = row.c[0] ? row.c[0].v : null; // أول خلية في العمود الأول
+                    const value = row.c[1] ? row.c[1].v : null; // أول خلية في العمود الثاني
+                    if (key && value) {
+                        result[key] = value; // ربط المفتاح بالقيمة
+                    }
+                });
+    
+    
+                for (const key in result) {
+                    if (result.hasOwnProperty(key)) {
+                        targetObject[key] = result[key];
+                    }
+                }
+
+                const loginForm = document.getElementById('loginForm');
+                const usernameInput = document.getElementById('username');
+                const passwordInput = document.getElementById('password');
+
+                loginForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const username = usernameInput.value;
+                    const password = passwordInput.value;
+
+                    // التحقق من صحة بيانات الدخول
+                    if (targetObject[username] && targetObject[username].toString() === password) {
+                        // تخزين بيانات الدخول في Local Storage
+                        localStorage.setItem('username', username);
+                        localStorage.setItem('password', password);
+
+                        // تحويل المستخدم إلى صفحة الملف الشخصي
+                        window.location.href = 'Form.html';
+                        swal("تم التسجيل", "تم تسجيل الدخول بنجاح.", "success");
+                } else {
+                    swal("خطأ في تسجيل الدخول", 'اسم المستخدم أو كلمة المرور غير صحيحة', "error");
+                    }
+                });
+
+
+            })
+            .catch(error => {
+                console.error('Error fetching data from Google Sheets:', error);
+            });
+    </script>
+
+    <script src="javascript.js"></script>
+</body>
+
+</html> 
