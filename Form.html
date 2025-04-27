@@ -1,262 +1,565 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>October High Institute</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="./اساسيات/Logo_OHI_min.png" type="image/x-icon">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="./style.css">
+    <title>أنوار القرآن الكريم - جمعية رسالة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: 'Hanimation Arabic', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            direction: rtl;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: bold;
+            color: #2064df;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0095e0;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #2064df;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to left, #0095e0, #2064df);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #0095e0, #2064df);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 149, 224, 0.3);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            color: #0095e0;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            border: 2px solid #0095e0;
+        }
+
+        .btn-outline:hover {
+            background: #0095e0;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 149, 224, 0.3);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #0095e0, #2064df);
+        }
+
+        /* Header Styles */
+        header {
+            background: url('https://via.placeholder.com/1920x600') no-repeat center center/cover;
+            height: 15vh;
+            position: relative;
+            color: white;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo h1 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            color: #eee;
+            font-size: 0.9rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-left: 40px;
+        }
+
+        .hero-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2064df;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: #f0f8ff;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(32, 100, 223, 0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #0095e0;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: #2064df;
+        }
+
+        .service-card p {
+            color: #666;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+        }
+
+        .about .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-content {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            margin-top: 30px;
+        }
+
+        .social-icon {
+            display: inline-block;
+            background: #f0f8ff;
+            color: #0095e0;
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-left: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(to left, #0095e0, #2064df);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(to right, #0095e0, #2064df);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo p {
+            color: #eee;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h4::after, .footer-contact h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: #eee;
+        }
+
+        .footer-links ul li a:hover {
+            color: white;
+            padding-right: 5px;
+        }
+
+        .footer-contact p {
+            color: #eee;
+            margin-bottom: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #eee;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header {
+                height: auto;
+                min-height: 100vh;
+            }
+            header .container {
+                flex-direction: column;
+                padding: 20px 0;
+            }
+            .logo {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 5px 0;
+            }
+            .hero .container, .about .container {
+                flex-direction: column;
+            }
+            .hero-content, .about-content {
+                padding: 0;
+                margin-bottom: 40px;
+                text-align: center;
+            }
+            .buttons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn, .btn-outline {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @font-face {
+            font-family: 'Hanimation Arabic';
+            src: url('path-to-your-font/HanimationArabic-Bold.woff2') format('woff2');
+            font-weight: bold;
+            font-style: normal;
+        }
+    </style>
 </head>
-
 <body>
-
-    <div class="sidebar">
-        <h2 class="sidebar-logo">October High Institute</h2>
-        <div class="sidebar-menus">
-            <a href="https://www.facebook.com/ohinstitute">الصفحة الرسمية</a>
-            <a href="https://www.ohi.edu.eg/default.aspx">الموقع الرسمي</a>
-            <a href="https://wa.me/+201102716716?text=مرحبا اريد التواصل معكم">الدعم الفني</a>
-            <a href="./about.html">من نحن</a>
-            <a href="#" class="menu-off">إغلاق</a>
+    <!-- Navbar للوجو فقط -->
+    <nav class="logo-navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>أنوار القرآن الكريم</h1>
+                <p>نشر نور القرآن مجانًا</p>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="navbar">
-        <div class="menu-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
-                <path d="M5 5H13V19H5V5ZM19 19H15V5H19V19ZM4 3C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V4C21 3.44772 20.5523 3 20 3H4ZM7 12L11 8.5V15.5L7 12Z"></path>
-            </svg>
+    <!-- سايد بار -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h3>القائمة الرئيسية</h3>
         </div>
-        <img class="header-logo" src="./اساسيات/logo.jpg" alt="شعار مطعم OHI">
-        <!-- أيقونة الموقع -->
-        <a href="./index.html" class="user">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM12 20C16.42 20 20 16.42 20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20ZM12 11H16V13H12V16L8 12L12 8V11Z"></path></svg>        </a>
-    </div>
+        <ul class="sidebar-menu">
+            <li><a href="#home"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="#services"><i class="fas fa-book-quran"></i> خدماتنا</a></li>
+            <li><a href="talawat.html"><i class="fas fa-microphone"></i> التلاوات</a></li>
+            <li><a href="tajweed.html"><i class="fas fa-book-open"></i> التجويد</a></li>
+            <li><a href="tafseer.html"><i class="fas fa-quran"></i> التفسير</a></li>
+            <li><a href="hifz.html"><i class="fas fa-mosque"></i> التحفيظ</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i> عن الجمعية</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=100085572816884" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="mailto:anwarresalaquran@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="tel:01100363699"><i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+    </aside>
 
-    <div class="main-content">
-
-        <h1 class="page-title">نموذج تسجيل الطلاب</h1>
-
-        <div class="registration-form">
-            <form id="registration-form" name="registration-form">
-                <div class="form-group">
-                    <label for="name">الاسم الكامل:</label>
-                    <input type="text" id="name" name="name" class="form-control" pattern="[\u0600-\u06FF\s]+" title="يُسمح فقط بالحروف العربية" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="code">الكود الجامعي:</label>
-                    <input type="number" id="code" name="code" class="form-control" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="age">العمر:</label>
-                    <input type="number" id="age" name="age" class="form-control" min="16" max="30" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="number">رقم الهاتف:</label>
-                    <input type="tel" id="number" name="number" class="form-control" pattern="[0-9]{11}" title="يجب أن يتكون رقم الهاتف من 11 رقمًا" required>
-                </div>
-        
-                <div class="form-group">
-                    <label for="email">البريد الإلكتروني:</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="department">القسم:</label>
-                    <select id="department" name="department" class="form-control" required>
-                        <option value="">اختر القسم</option>
-                        <option value="cs">استثمار وبنوك</option>
-                        <option value="it">نظم معلومات الاعمال</option>
-                        <option value="is">إدار اعمال</option>
-                        <option value="ai">تسويق</option>
-                    </select>
-                </div>
-                
-                <button type="submit" class="submit-btn" id="submitBtn">تسجيل</button>
-                
-                <!-- رسالة جاري الإرسال -->
-                <div id="loadingMessage" style="display: none; text-align: center; margin-top: 15px;">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="sr-only">جاري التحميل...</span>
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>مرحبًا بكم في أنوار القرآن</h2>
+                    <p>قناة مُخصصة لنشر نور القرآن الكريم والتعاليم الإسلامية مجانًا، مستوحاة من رسالة فريق أنوار القرآن التابع لجمعية رسالة الخيرية.</p>
+                    <div class="buttons">
+                        <a href="#services" class="btn">اكتشف خدماتنا</a>
+                        <a href="#contact" class="btn-outline">انضم إلينا</a>
                     </div>
-                    <p style="margin-top: 10px;">جاري إرسال البيانات، الرجاء الانتظار...</p>
                 </div>
-            </form>
-        </div>
+                <div class="hero-image">
+                    <img src="https://via.placeholder.com/500x400" alt="مصحف شريف">
+                </div>
+            </div>
+        </section>
 
-        <hr>
+        <!-- قسم الخدمات -->
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">خدماتنا</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-book-quran"></i></div>
+                        <h3>تلاوات رائعة</h3>
+                        <p>استمتع بتلاوات مميزة للقرآن الكريم.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-book-open"></i></div>
+                        <h3>دروس التجويد</h3>
+                        <p>تعلم أحكام التجويد بطريقة سهلة.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-quran"></i></div>
+                        <h3>التفسير</h3>
+                        <p>فهم الآيات القرآنية بشكل مبسط.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-mosque"></i></div>
+                        <h3>تحفيظ القرآن</h3>
+                        <p>دورات تحفيظ مجانية لكل الأعمار.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    </div>
+        <!-- قسم عن الجمعية -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">عن الجمعية</h2>
+                <div class="about-content">
+                    <p>أنوار القرآن هي مؤسسة تهدف إلى تعليم القرآن الكريم بمشاركة مشايخ محترفين، مع التركيز على تقديم محتوى تعليمي شامل.</p>
+                </div>
+            </div>
+        </section>
 
-    
-    <div class="data-container">
-        <h1 class="data-title">بيانات الطلاب المسجلين</h1>
-        
-        <div id="data-container">
-            <!-- سيتم ملء البطاقات هنا بواسطة JavaScript -->
-            <div style="text-align: center; grid-column: 1 / -1;">جاري تحميل البيانات...</div>
-        </div>
-    </div>
-        
-    <button id="logoutButton" class="logout-btn">  تسجيل الخروج  </button><br>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>أنوار القرآن</h3>
+                    <p>نشر نور القرآن الكريم</p>
+                </div>
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#services">خدماتنا</a></li>
+                        <li><a href="#about">عن الجمعية</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>تواصل معنا</h4>
+                    <p>البريد الإلكتروني: <a href="mailto:anwarresalaquran@gmail.com">anwarresalaquran@gmail.com</a></p>
+                    <p>الهاتف: <strong>011 00363699</strong></p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 أنوار القرآن. جميع الحقوق محفوظة.</p>
+            </div>
+        </footer>
+    </main>
 
-    <div class="footer">
-        <p> ©2025 حقوق النشر طلاب معهد اكتوبر العالي للهندسة</p>
-    </div>
-    
     <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycbwrj9OpVczwOuocRk5U3zw2KVOKRSXzfJqHkNyE3gbJKnY9kjp5hjA_Lgs7wzGSkII/exec";
-        const form = document.forms["registration-form"];
-        const submitBtn = document.getElementById("submitBtn");
-        const loadingMessage = document.getElementById("loadingMessage");
-        
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
+        // جعل السايد بار متجاوباً
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
             
-            // التحقق من صحة النموذج قبل الإرسال
-            if(!form.checkValidity()) {
-                Swal.fire('خطأ', 'يرجى ملء جميع الحقول المطلوبة بشكل صحيح', 'error');
-                return;
-            }
-            
-            // تعطيل الزر وإظهار رسالة التحميل
-            submitBtn.disabled = true;
-            loadingMessage.style.display = "block";
-            
-            fetch(scriptURL, { 
-                method: "POST", 
-                body: new FormData(form) 
-            })
-            .then((response) => {
-                if(response.ok) {
-                    Swal.fire('تم بنجاح', 'تم تسجيل البيانات بنجاح', 'success');
-                    form.reset();
+            function adjustLayout() {
+                if (window.innerWidth < 768) {
+                    sidebar.style.display = 'none';
+                    mainContent.style.marginRight = '0';
                 } else {
-                    throw new Error('Network response was not ok');
+                    sidebar.style.display = 'block';
+                    mainContent.style.marginRight = '250px';
                 }
-            })
-            .catch((error) => {
-                Swal.fire('خطأ', 'حدث خطأ أثناء محاولة التسجيل', 'error');
-                console.error('Error:', error);
-            })
-            .finally(() => {
-                // إعادة تمكين الزر وإخفاء رسالة التحميل
-                submitBtn.disabled = false;
-                loadingMessage.style.display = "none";
-            });
-        });
-    
-        document.addEventListener('DOMContentLoaded', () => {
-            const username = localStorage.getItem('username');
-            if (!username) {
-                window.location.href = './auth.html';
-            } else {
-                document.getElementById('username').textContent = username;
             }
+            
+            window.addEventListener('resize', adjustLayout);
+            adjustLayout();
+            
+            // زر القائمة المتنقلة للجوال
+            const mobileMenuBtn = document.createElement('div');
+            mobileMenuBtn.className = 'mobile-menu-btn';
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.appendChild(mobileMenuBtn);
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
+            });
         });
-        
-        const logoutButton = document.getElementById('logoutButton');
-        if(logoutButton) {
-            logoutButton.addEventListener('click', () => {
-                localStorage.removeItem('username');
-                localStorage.removeItem('password');
-                window.location.href = './../../index.html';
-                swal("تم تسجيل الخروج", "تم تسجيل الخروج بنجاح.", "success");
-            });
-        }
     </script>
-
-    <script>
-
-        // جلب وعرض بيانات الطلاب من Google Sheets
-        const sheetID = '1jPKYsdxnocGk3Y8lJg00C_nppVLhEm07-v-LAx-gnq0';
-        const base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
-
-        fetch(base)
-            .then(response => response.text())
-            .then(data => {
-                const json = JSON.parse(data.substring(47).slice(0, -2));
-                const tableData = json.table.rows;
-                const dataContainer = document.getElementById('data-container');
-                
-                // مسح رسالة التحميل
-                dataContainer.innerHTML = '';
-                
-                if (!tableData || tableData.length === 0) {
-                    dataContainer.innerHTML = '<div style="text-align: center; grid-column: 1 / -1;">لا توجد بيانات متاحة</div>';
-                    return;
-                }
-
-                tableData.forEach((row, index) => {
-                    const card = document.createElement('div');
-                    card.classList.add('card');
-
-                    const name = row.c && row.c[0] ? row.c[0].v : "غير متوفر";
-                    const code = row.c && row.c[1] ? row.c[1].v : "غير متوفر";
-                    const age = row.c && row.c[2] ? row.c[2].v : "غير متوفر";
-                    const number = row.c && row.c[3] ? row.c[3].v : "غير متوفر";
-                    const email = row.c && row.c[4] ? row.c[4].v : "غير متوفر";
-                    const department = row.c && row.c[5] ? row.c[5].v : "غير محدد";
-
-                    const registeredId = `registered-${index}`;
-                    const activeId = `active-${index}`;
-
-                    card.innerHTML = `
-                        <div class="card-content">
-                            <h2>الاسم: ${name}</h2>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-title">الكود الجامعي: ${code}</div>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-title">العمر: ${age}</div>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-title">رقم الهاتف: ${number}</div>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-title">البريد الإلكتروني: ${email}</div>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-title">القسم: ${getDepartmentName(department)}</div>
-                        </div>
-
-                    `;
-                
-                    dataContainer.appendChild(card);
-
-                });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('data-container').innerHTML = `
-                    <div style="text-align: center; grid-column: 1 / -1; color: var(--primary);">
-                        حدث خطأ أثناء جلب البيانات، يرجى المحاولة لاحقاً
-                    </div>
-                `;
-                Swal.fire('خطأ', 'حدث خطأ أثناء جلب البيانات', 'error');
-            });
-
-        // تحويل كود القسم إلى اسم قابل للقراءة
-        function getDepartmentName(code) {
-            const departments = {
-                'cs': 'علوم الحاسب',
-                'it': 'تكنولوجيا المعلومات',
-                'is': 'نظم المعلومات',
-                'ai': 'الذكاء الاصطناعي'
-            };
-            return departments[code] || code || 'غير محدد';
-        }
-    </script>
-
-    <script src="javascript.js"></script>
-
 </body>
-
-</html> 
+</html>
