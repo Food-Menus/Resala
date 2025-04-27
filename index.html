@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,35 +12,32 @@
             --secondary-color: #2064df;
             --text-color: #333;
             --light-color: #ffffff;
-            --back-color:#87dbff;
+            --back-color1:#87dbff;
+            --back-color2:#45c7ff;
             --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
-        
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
-            background: linear-gradient(265deg, var(--back-color), var(--light-color), var(--back-color));
+            background: linear-gradient(265deg, var(--back-color1), var(--light-color), var(--back-color2));
             background-size: 800% 200%;
             animation: backgroundAnimation 15s  infinite;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
-        
         @keyframes backgroundAnimation {
             0% { background-position: 0% 90%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 90%; }
-        }
-        
+        }     
         header {
             background-color: rgba(0, 149, 224, 0.9);
             color: var(--light-color);
@@ -47,59 +45,40 @@
             text-align: center;
             border-radius: 0 0 10px 10px;
             box-shadow: var(--shadow);
-        }
-        
+            margin-bottom: 20px;
+        }       
         header h1 {
             font-size: 2rem;
             margin-bottom: 0.5rem;
+        }       
+        .logo-navbar {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 20px 0;
         }
-        
-        nav {
-            background-color: rgba(32, 100, 223, 0.9);
-            color: var(--light-color);
-            padding: 1rem;
+        .container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* يضع العناصر في المنتصف */
             align-items: center;
-            border-radius: 10px;
-            margin: 1rem;
-            box-shadow: var(--shadow);
+            position: relative; /* مهم لوضع الزر بشكل مطلق */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
+        .logo {
+            text-align: center; /* محاذاة النص للمنتصف */
         }
-        
-        .nav-links a {
-            color: var(--light-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 0.5rem;
-            border-radius: 5px;
-        }
-        
-        .nav-links a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
         .toggle-btn {
+            position: absolute; /* يثبت الزر في مكانه */
+            right: 20px; /* يضعه على اليمين */
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 4px;
+            font-size: 20px;
             cursor: pointer;
-            background-color: transparent;
-            border: none;
-            color: var(--light-color);
-            font-weight: bold;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: var(--transition);
-        }
-        
-        .toggle-btn:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
+        }   
         .sidebar {
             width: 250px;
             background-color: rgba(255, 255, 255, 0.95);
@@ -113,27 +92,22 @@
             transition: var(--transition);
             z-index: 1000;
             overflow-y: auto;
-        }
-        
+        }      
         .sidebar.open {
             right: 0;
-        }
-        
+        }        
         .sidebar h3 {
             color: var(--primary-color);
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--primary-color);
-        }
-        
+        }        
         .sidebar ul {
             list-style: none;
-        }
-        
+        }       
         .sidebar li {
             margin-bottom: 1rem;
         }
-        
         .sidebar a {
             color: var(--text-color);
             text-decoration: none;
@@ -142,25 +116,21 @@
             padding: 0.5rem;
             border-radius: 5px;
         }
-        
         .sidebar a:hover {
             background-color: rgba(0, 149, 224, 0.1);
             color: var(--primary-color);
         }
-        
         .content {
             margin: 1rem;
             padding: 1rem;
             flex: 1;
         }
-        
         .cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
             margin-top: 1rem;
         }
-        
         .card {
             background-color: var(--light-color);
             border: 1px solid #ddd;
@@ -172,23 +142,19 @@
             flex-direction: column;
             height: 100%;
         }
-        
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
-        
         .card h2 {
             color: var(--primary-color);
             margin-bottom: 1rem;
             font-size: 1.3rem;
         }
-        
         .card p {
             margin-bottom: 1.5rem;
             flex-grow: 1;
         }
-        
         .button {
             background-color: var(--primary-color);
             color: var(--light-color);
@@ -201,13 +167,11 @@
             align-self: flex-start;
             text-decoration: none;
             display: inline-block;
-        }
-        
+        }        
         .button:hover {
             background-color: var(--secondary-color);
             transform: translateY(-2px);
-        }
-        
+        }        
         footer {
             background-color: rgba(0, 149, 224, 0.9);
             color: var(--light-color);
@@ -217,14 +181,11 @@
             border-radius: 10px 10px 0 0;
             box-shadow: var(--shadow);
         }
-        
-        /* تأثيرات للعناوين */
         .section-title {
             position: relative;
             margin-bottom: 2rem;
             text-align: center;
-        }
-        
+        }        
         .section-title::after {
             content: '';
             position: absolute;
@@ -235,242 +196,308 @@
             height: 3px;
             background: var(--primary-color);
         }
-        
-/* إعدادات خاصة بالهواتف المحمولة */
-@media (max-width: 768px) {
-    :root {
-        --mobile-padding: 0.8rem;
-    }
-    
-    body {
-        font-size: 14px;
-        animation: none; /* إيقاف تحريك الخلفية على الموبايل لتوفير البطارية */
-        background: linear-gradient(to bottom, var(--light-color), var(--primary-color));
-    }
-    
-    header {
-        padding: 1rem var(--mobile-padding);
-        border-radius: 0;
-    }
-    
-    header h1 {
-        font-size: 1.5rem;
-    }
-    
-    nav {
-        flex-direction: column;
-        gap: 0.8rem;
-        padding: 0.8rem;
-        margin: 0.5rem;
-        border-radius: 8px;
-    }
-    
-    .nav-links {
-        width: 100%;
-        justify-content: space-around;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-    }
-    
-    .nav-links a {
-        padding: 0.4rem;
-        font-size: 0.9rem;
-    }
-    
-    .toggle-btn {
-        width: 100%;
-        padding: 0.6rem;
-        font-size: 0.9rem;
-    }
-    
-    .sidebar {
-        width: 85%;
-        padding: 1rem;
-        right: -100%;
-    }
-    
-    .sidebar.open {
-        right: 0;
-    }
-    
-    .content {
-        margin: 0.5rem;
-        padding: 0.8rem;
-    }
-    
-    .cards-container {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .card {
-        padding: 1rem;
-    }
-    
-    .card h2 {
-        font-size: 1.2rem;
-    }
-    
-    .button {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-    }
-    
-    footer {
-        padding: 1rem;
-        border-radius: 0;
-    }
-    
-    .section-title {
-        margin-bottom: 1.5rem;
-        font-size: 1.3rem;
-    }
-    
-    .section-title::after {
-        width: 60px;
-        height: 2px;
-        bottom: -8px;
-    }
-}
+        .intro-video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 800px; /* يمكنك تعديل هذا حسب احتياجك */
+            padding: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px; /* لتقريب زوايا الإطار */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 
+                        0 0 0 10px rgba(255, 255, 255, 0.8), 
+                        0 0 0 12px #0095e0; /* إطار متعدد الطبقات */
+            position: relative;
+            overflow: hidden;
+        }
+        .intro-video {
+            margin-right: 25%;
+            width: 50%; /* حجم الفيديو داخل الإطار */
+            border-radius: 10px; /* تقريب زوايا الفيديو */
+            display: block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .intro-video:hover {
+            transform: scale(1.02); /* تأثير تكبير بسيط عند hover */
+        }
+        .intro-video-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                        #0095e0, #2064df, #0095e0);
+            z-index: -1;
+            border-radius: 22px; /* أكبر بقليل من الإطار الأساسي */
+            animation: borderAnimation 4s linear infinite;
+            background-size: 200% 200%;
+        }
 
-/* تحسينات إضافية للشاشات الصغيرة جدًا */
-@media (max-width: 480px) {
-    :root {
-        --mobile-padding: 0.6rem;
-    }
-    
-    header h1 {
-        font-size: 1.3rem;
-    }
-    
-    header p {
-        font-size: 0.9rem;
-    }
-    
-    .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.3rem;
-    }
-    
-    .nav-links a {
-        width: 100%;
-        text-align: center;
-    }
-    
-    .card {
-        padding: 0.8rem;
-    }
-    
-    .card h2 {
-        font-size: 1.1rem;
-    }
-    
-    .sidebar {
-        width: 90%;
-    }
-}
+
+        @keyframes borderAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @media (max-width: 768px) {
+            .intro-video-container {
+                width: 95%;
+                padding: 10px;
+                border-radius: 15px;
+            }
+            
+            .intro-video {
+                margin-right: 5%;
+                width: 90%;
+            }
+            
+            .intro-video-container::before {
+                border-radius: 17px;
+            }
+        }
+        @media (max-width: 768px) {
+            :root {
+                --mobile-padding: 0.8rem;
+            }
+            
+            body {
+                font-size: 14px;
+                animation: none; /* إيقاف تحريك الخلفية على الموبايل لتوفير البطارية */
+                background: linear-gradient(to bottom, var(--light-color), var(--primary-color));
+            }
+            
+            header {
+                padding: 1rem var(--mobile-padding);
+                border-radius: 0;
+            }
+            
+            header h1 {
+                font-size: 1.5rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 0.8rem;
+                margin: 0.5rem;
+                border-radius: 8px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+            
+            .nav-links a {
+                padding: 0.4rem;
+                font-size: 0.9rem;
+            }
+            
+            .toggle-btn {
+                width: 100%;
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+            
+            .sidebar {
+                width: 85%;
+                padding: 1rem;
+                right: -100%;
+            }
+            
+            .sidebar.open {
+                right: 0;
+            }
+            
+            .content {
+                margin: 0.5rem;
+                padding: 0.8rem;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .card {
+                padding: 1rem;
+            }
+            
+            .card h2 {
+                font-size: 1.2rem;
+            }
+            
+            .button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            footer {
+                padding: 1rem;
+                border-radius: 0;
+            }
+            
+            .section-title {
+                margin-bottom: 1.5rem;
+                font-size: 1.3rem;
+            }
+            
+            .section-title::after {
+                width: 60px;
+                height: 2px;
+                bottom: -8px;
+            }
+        }
+        @media (max-width: 480px) {
+            :root {
+                --mobile-padding: 0.6rem;
+            }
+            
+            header h1 {
+                font-size: 1.3rem;
+            }
+            
+            header p {
+                font-size: 0.9rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.3rem;
+            }
+            
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .card {
+                padding: 0.8rem;
+            }
+            
+            .card h2 {
+                font-size: 1.1rem;
+            }
+            
+            .sidebar {
+                width: 90%;
+            }
+        }
+        
     </style>
 </head>
+
 <body>
 
-<header>
-    <h1>مرحبًا بكم في الموقع التعليمي</h1>
-    <p>تعلم القرآن الكريم والتجويد بسهولة</p>
-</header>
-
-<nav>
-    <div>
-        <button class="toggle-btn" onclick="toggleSidebar()">
-            <span>☰</span> القائمة الجانبية
-        </button>
-    </div>
-    <div class="nav-links">
-        <a href="#">الرئيسية</a>
-        <a href="#">الدروس</a>
-        <a href="#">المدربون</a>
-        <a href="#">التواصل</a>
-    </div>
-</nav>
-
-<div class="sidebar" id="sidebar">
-    <h3>القائمة الجانبية</h3>
-    <ul>
-        <li><a href="#">الرئيسية</a></li>
-        <li><a href="#">التلاوات القرآنية</a></li>
-        <li><a href="#">دروس التجويد</a></li>
-        <li><a href="#">تفسير القرآن</a></li>
-        <li><a href="#">دورات الحفظ</a></li>
-        <li><a href="#">الأسئلة الشائعة</a></li>
-        <li><a href="#">اتصل بنا</a></li>
-    </ul>
-</div>
-
-<div class="content">
-    <h2 class="section-title">خدماتنا التعليمية</h2>
+    <header class="logo-navbar">
+        <div class="container">
+            <!-- زر القائمة على اليمين -->
+            <button class="toggle-btn" onclick="toggleSidebar()">
+                <span>☰</span> القائمة
+            </button>
     
-    <div class="cards-container">
-        <div class="card">
-            <h2>🔹 تلاوات قرآنية خاشعة بأصوات ندية</h2>
-            <p>استمتع بأجمل التلاوات من قراء مشهورين حول العالم، مع إمكانية التحميل والاستماع بدون انترنت.</p>
-            <a href="#" class="button">استمع الآن</a>
+            <!-- العنوان والوصف في المنتصف -->
+            <div class="logo">
+                <h1>أنوار القرآن الكريم</h1>
+                <p>تعلم القرآن الكريم والتجويد بسهولة</p>
+            </div>
         </div>
-        
-        <div class="card">
-            <h2>🔹 دروس تعليمية لتعلم التجويد</h2>
-            <p>دروس متكاملة لتعلم أحكام التجويد بسهولة، مع شروح مرئية وأمثلة تطبيقية.</p>
-            <a href="#" class="button">ابدأ التعلم</a>
-        </div>
-        
-        <div class="card">
-            <h2>🔹 تفسير مبسط لآيات القرآن الكريم</h2>
-            <p>تفسير سهل وواضح لآيات القرآن مع التركيز على الدروس المستفادة والتطبيقات العملية.</p>
-            <a href="#" class="button">اقرأ المزيد</a>
-        </div>
-        
-        <div class="card">
-            <h2>🔹 دورات مجانية لحفظ القرآن</h2>
-            <p>برامج مخصصة لحفظ القرآن الكريم لكل الفئات العمرية، مع متابعة وتقييم مستمر.</p>
-            <a href="#" class="button">انضم الآن</a>
-        </div>
-        
-        <div class="card">
-            <h2>🔹 نشر تعاليم الإسلام</h2>
-            <p>تعليم الأسس والمبادئ الإسلامية بشكل مبسط ووسطي، مع الرد على الاستفسارات.</p>
-            <a href="#" class="button">تعرف على المزيد</a>
-        </div>
-        
-        <div class="card">
-            <h2>🔹 اختبارات تقييمية</h2>
-            <p>اختبر معلوماتك في القرآن والتجويد والعقيدة عبر اختبارات تفاعلية مع نتائج فورية.</p>
-            <a href="#" class="button">ابدأ الاختبار</a>
-        </div>
+    </header>
+
+
+
+    <div class="sidebar" id="sidebar">
+        <h3>القائمة الجانبية</h3>
+        <ul>
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#">التلاوات القرآنية</a></li>
+            <li><a href="#">دروس التجويد</a></li>
+            <li><a href="#">تفسير القرآن</a></li>
+            <li><a href="#">دورات الحفظ</a></li>
+            <li><a href="#">الأسئلة الشائعة</a></li>
+            <li><a href="#">اتصل بنا</a></li>
+        </ul>
     </div>
-</div>
 
-<footer>
-    <p>جميع الحقوق محفوظة &copy; <span id="year"></span> - الموقع التعليمي</p>
-</footer>
+    <video class="intro-video" autoplay muted loop playsinline>
+        <source src="./اساسيات/video.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو
+    </video>
 
-<script>
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('open');
-    }
-    
-    // إضافة سنة تلقائية في الفوتر
-    document.getElementById('year').textContent = new Date().getFullYear();
-    
-    // إغلاق السايدبار عند النقر خارجها
-    document.addEventListener('click', function(event) {
-        const sidebar = document.getElementById('sidebar');
-        const toggleBtn = document.querySelector('.toggle-btn');
+    <div class="content">
+        <h2 class="section-title">خدماتنا التعليمية</h2>
         
-        if (!sidebar.contains(event.target) && event.target !== toggleBtn && !toggleBtn.contains(event.target)) {
-            sidebar.classList.remove('open');
+        <div class="cards-container">
+
+            <div class="card">
+                <h2>🔹 تلاوات قرآنية خاشعة بأصوات ندية</h2>
+                <p>استمتع بأجمل التلاوات من قراء مشهورين حول العالم، مع إمكانية التحميل والاستماع بدون انترنت.</p>
+                <a href="#" class="button">استمع الآن</a>
+            </div>
+            
+            <div class="card">
+                <h2>🔹 دروس تعليمية لتعلم التجويد</h2>
+                <p>دروس متكاملة لتعلم أحكام التجويد بسهولة، مع شروح مرئية وأمثلة تطبيقية.</p>
+                <a href="#" class="button">ابدأ التعلم</a>
+            </div>
+            
+            <div class="card">
+                <h2>🔹 تفسير مبسط لآيات القرآن الكريم</h2>
+                <p>تفسير سهل وواضح لآيات القرآن مع التركيز على الدروس المستفادة والتطبيقات العملية.</p>
+                <a href="#" class="button">اقرأ المزيد</a>
+            </div>
+            
+            <div class="card">
+                <h2>🔹 دورات مجانية لحفظ القرآن</h2>
+                <p>برامج مخصصة لحفظ القرآن الكريم لكل الفئات العمرية، مع متابعة وتقييم مستمر.</p>
+                <a href="#" class="button">انضم الآن</a>
+            </div>
+            
+            <div class="card">
+                <h2>🔹 نشر تعاليم الإسلام</h2>
+                <p>تعليم الأسس والمبادئ الإسلامية بشكل مبسط ووسطي، مع الرد على الاستفسارات.</p>
+                <a href="#" class="button">تعرف على المزيد</a>
+            </div>
+            
+            <div class="card">
+                <h2>🔹 اختبارات تقييمية</h2>
+                <p>اختبر معلوماتك في القرآن والتجويد والعقيدة عبر اختبارات تفاعلية مع نتائج فورية.</p>
+                <a href="#" class="button">ابدأ الاختبار</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; <span id="year"></span> - الموقع التعليمي</p>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
         }
-    });
-</script>
+        
+        // إضافة سنة تلقائية في الفوتر
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // إغلاق السايدبار عند النقر خارجها
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.querySelector('.toggle-btn');
+            
+            if (!sidebar.contains(event.target) && event.target !== toggleBtn && !toggleBtn.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>
 
 </body>
 </html>
